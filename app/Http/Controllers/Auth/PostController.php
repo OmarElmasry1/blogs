@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -17,7 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+
+        return view('auth.posts.index', compact('posts'));
     }
 
     /**
@@ -41,32 +44,48 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        try {
 
+            DB::beginTransaction();
 
-        $request->validate([
+                $request->validate([
 
-            'title' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'category' => ['required', 'string'],
-            'status' => ['required', 'string'],
-            'tag' => ['required', 'array'],
-            'tag.*' => ['required', 'string']
-        ]);
+                    'title' => ['required', 'string'],
+                    'description' => ['required', 'string'],
+                    'category' => ['required', 'string'],
+                    'status' => ['required', 'string'],
+                    'tags' => ['required', 'array'],
+                    'tags.*' => ['required', 'string']
+                ]);
 
-        Post::create([
-            'user_id' =>auth()->id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'category_id' => $request->category,
-            'status' => $request->status,
+                $post = Post::create([
+                    'user_id' =>auth()->id(),
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'category_id' => $request->category,
+                    'status' => $request->status,
 
+                ]);
 
+                foreach ($request->tags as $tag) {
 
-        ]);
-        dd($request);
+                    $post->tags()->attach($tag);
 
-        return $request->all();
+                }
 
+                DB::commit();
+
+                $request->session()->flash('alert-success', 'Post Created Successfully');
+                return to_route('posts.index');
+
+        }
+
+    catch (\Exception $ex) {
+            DB::rollback();
+            return back()->withErrors($ex->getMessage());
+    }
+
+   return $request->all();
 
 
     }
@@ -77,9 +96,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+
+        return view('auth.posts.show', compact('post'));
+
     }
 
     /**
@@ -90,7 +111,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        $categories= Category::all();
+        $tags= Tag::all();
+        return view('auth.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -100,9 +124,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $post->update([
+            'user_id' =>auth()->id(),
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->category,
+            'status' => $request->status,
+
+        ]);
+        foreach ($request->tags as $tag) {
+
+            $post->tags()->attach($tag);
+
+        };
+
+        $request->session()->flash('alert-success', 'Post Updated Successfully');
+        return to_route('posts.index');
+
     }
 
     /**
@@ -113,6 +153,17 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+       if(! $post) {
+           abort(404);
+       }
+
+       $post->tags()->detach();
+
+       $post->delete();
+        session()->flash('alert-success', 'Post Deleted Successfully');
+
+       return to_route('posts.index');
     }
 }

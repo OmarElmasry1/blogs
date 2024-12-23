@@ -69,7 +69,7 @@
 
                         <div class="mb-3 form-group">
                             <label  class="form-label">Tags</label>
-                            <select name="tag[]"  class="form-control selectpicker" multiple data-live-search >
+                            <select name="tags[]"  class="form-control selectpicker" multiple data-live-search >
                                 <option value="" disabled selected>Choose Option</option>
                                 @if(count($tags) > 0)
                                     @foreach($tags as $tag)

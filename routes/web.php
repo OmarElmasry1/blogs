@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\CategoryController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\Auth\PostController;
+use App\Http\Controllers\Auth\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +27,9 @@ Route::get('/logout', function () {
 
 Auth::routes();
 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::resource('auth/posts', PostController::class);
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('auth/categories', [CategoryController::class, 'CategoryPage'])->name('auth.categories');
+Route::get('auth/tags', [TagController::class, 'TagPage'])->name('auth.tags');

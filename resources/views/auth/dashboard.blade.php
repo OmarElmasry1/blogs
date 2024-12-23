@@ -1,6 +1,13 @@
 @extends('layouts.auth');
 
 
+
+@section('styles')
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+@endsection
+
 @section('content')
 
 
@@ -15,170 +22,64 @@
             <!-- Top Statistics -->
             <div class="row">
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card card-default card-mini">
+                    <div class="card card-default card" style="height: 140px">
                         <div class="card-header">
-                            <h2>$18,699</h2>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </a>
+                            <h2>{{$userCount}}</h2>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
                             <div class="sub-title">
-                                <span class="mr-1">Sales of this year</span> |
-                                <span class="mx-1">45%</span>
-                                <i class="mdi mdi-arrow-up-bold text-success"></i>
+                                <span class="mr-1" style="font-size: 20px">users</span> |
+
+                                <i class="fa-sharp fa-solid fa-user" style="font-size: 23px"></i>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-wrapper">
-                                <div>
-                                    <div id="spline-area-1"></div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card card-default card-mini">
+                    <div class="card card-default card" style="height: 140px">
                         <div class="card-header">
-                            <h2>$14,500</h2>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </a>
+                            <h2>{{$postCount}}</h2>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
                             <div class="sub-title">
-                                <span class="mr-1">Expense of this year</span> |
-                                <span class="mx-1">50%</span>
-                                <i class="mdi mdi-arrow-down-bold text-danger"></i>
+                                <span class="mr-1" style="font-size: 20px">posts</span> |
+
+                                <i class="fa-solid fa-address-card" style="font-size: 23px"></i>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-wrapper">
-                                <div>
-                                    <div id="spline-area-2"></div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card card-default card-mini">
+                    <div class="card card-default card" style="height: 140px">
                         <div class="card-header">
-                            <h2>$4199</h2>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </a>
+                            <h2>{{$categoryCount}}</h2>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
                             <div class="sub-title">
-                                <span class="mr-1">Profit of this year</span> |
-                                <span class="mx-1">20%</span>
-                                <i class="mdi mdi-arrow-down-bold text-danger"></i>
+                                <span class="mr-1" style="font-size: 20px">categories</span> |
+
+                                <i  class="fa-solid fa-list"style="font-size: 23px"> </i>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-wrapper">
-                                <div>
-                                    <div id="spline-area-3"></div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card card-default card-mini">
+                    <div class="card card-default card" style="height: 140px">
                         <div class="card-header">
-                            <h2>$20,199</h2>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </a>
+                            <h2>{{$tagCount}}</h2>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
                             <div class="sub-title">
-                                <span class="mr-1">Revenue of this year</span> |
-                                <span class="mx-1">35%</span>
-                                <i class="mdi mdi-arrow-up-bold text-success"></i>
+                                <span class="mr-1" style="font-size: 20px">tags</span> |
+                                <i class="fa-solid fa-tag" style="font-size: 23px"> </i>
+
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-wrapper">
-                                <div>
-                                    <div id="spline-area-4"></div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="row">
-                <div class="col-xl-8">
-
-                    <!-- Income and Express -->
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h2>Income And Expenses</h2>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" data-display="static">
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-wrapper">
-                                <div id="mixed-chart-1"></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-                <div class="col-xl-4">
-                    <!-- Current Users  -->
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h2>Current Users</h2>
-                            <span>Realtime</span>
-                        </div>
-                        <div class="card-body">
-                            <div id="barchartlg2"></div>
-                        </div>
-                        <div class="card-footer bg-white py-4">
-                            <a href="#" class="text-uppercase">Current Users Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 

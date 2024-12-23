@@ -130,57 +130,17 @@
 
                     <li
                     >
-                        <a class="sidenav-item-link" href="chat.html">
+                        <a class="sidenav-item-link" href="{{route('auth.categories')}}">
                             <i class="mdi mdi-wechat"></i>
                             <span class="nav-text">Categories</span>
                         </a>
                     </li>
 
-
-
-
-
-                    <li
-                    >
-                        <a class="sidenav-item-link" href="contacts.html">
-                            <i class="mdi mdi-phone"></i>
-                            <span class="nav-text">Contacts</span>
-                        </a>
-                    </li>
-
-
-
-
-
-                    <li
-                    >
-                        <a class="sidenav-item-link" href="team.html">
-                            <i class="mdi mdi-account-group"></i>
-                            <span class="nav-text">Team</span>
-                        </a>
-                    </li>
-
-
-
-
-
-                    <li
-                    >
-                        <a class="sidenav-item-link" href="calendar.html">
-                            <i class="mdi mdi-calendar-check"></i>
-                            <span class="nav-text">Calendar</span>
-                        </a>
-                    </li>
-
-
-
-
-
                     <li  class="has-sub" >
                         <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#email"
                            aria-expanded="false" aria-controls="email">
                             <i class="mdi mdi-email"></i>
-                            <span class="nav-text">email</span> <b class="caret"></b>
+                            <span class="nav-text">Posts</span> <b class="caret"></b>
                         </a>
                         <ul  class="collapse"  id="email"
                              data-parent="#sidebar-menu">
@@ -189,8 +149,8 @@
 
 
                                 <li >
-                                    <a class="sidenav-item-link" href="email-inbox.html">
-                                        <span class="nav-text">Email Inbox</span>
+                                    <a class="sidenav-item-link" href="{{route('posts.index')}}">
+                                        <span class="nav-text">Posts</span>
 
                                     </a>
                                 </li>
@@ -201,8 +161,8 @@
 
 
                                 <li >
-                                    <a class="sidenav-item-link" href="email-details.html">
-                                        <span class="nav-text">Email Details</span>
+                                    <a class="sidenav-item-link" href="{{route('posts.create')}}">
+                                        <span class="nav-text">Create Post</span>
 
                                     </a>
                                 </li>
@@ -225,6 +185,46 @@
                             </div>
                         </ul>
                     </li>
+
+
+
+                    <li
+                    >
+                        <a class="sidenav-item-link" href="contacts.html">
+                            <i class="mdi mdi-phone"></i>
+                            <span class="nav-text">Contacts</span>
+                        </a>
+                    </li>
+
+
+
+
+
+                    <li
+                    >
+                        <a class="sidenav-item-link" href="{{route('auth.tags')}}">
+                            <i class="mdi mdi-account-group"></i>
+                            <span class="nav-text">Tags</span>
+                        </a>
+                    </li>
+
+
+
+
+
+                    <li
+                    >
+                        <a class="sidenav-item-link" href="calendar.html">
+                            <i class="mdi mdi-calendar-check"></i>
+                            <span class="nav-text">Calendar</span>
+                        </a>
+                    </li>
+
+
+
+
+
+
 
 
 
