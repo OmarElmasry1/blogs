@@ -48,6 +48,14 @@ class PostController extends Controller
 
             DB::beginTransaction();
 
+
+            if($file = $request ->file('file')) {
+
+                $fileName = $file->getClientOriginalName();
+                dd($fileName);
+            }
+
+
                 $request->validate([
 
                     'title' => ['required', 'string'],

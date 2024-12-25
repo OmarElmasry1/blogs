@@ -29,7 +29,7 @@
 
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{route('posts.store')}}">
+                    <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label  class="form-label">Title</label>
@@ -79,6 +79,12 @@
                                     @endforeach
                                 @endif
                             </select>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label  class="form-label">Upload Images</label>
+                            <input type="file" name="file" class="form-control" value="{{old('file')}}" placeholder="upload your images"  >
 
                         </div>
 
