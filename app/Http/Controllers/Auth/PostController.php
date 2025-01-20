@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Nette\Utils\Random;
 
 class PostController extends Controller
 {
@@ -49,15 +51,10 @@ class PostController extends Controller
             DB::beginTransaction();
 
 
-            if($file = $request ->file('file')) {
-
-                $fileName = $file->getClientOriginalName();
-                dd($fileName);
-            }
 
 
                 $request->validate([
-
+                    'file' => ['required', 'image', 'mimes:jpg'],
                     'title' => ['required', 'string'],
                     'description' => ['required', 'string'],
                     'category' => ['required', 'string'],
@@ -66,7 +63,18 @@ class PostController extends Controller
                     'tags.*' => ['required', 'string']
                 ]);
 
+                if($file = $request ->file('file')) {
+
+                $fileName = $this->uploadFile($file);
+
+                $image = $this->storeImage($fileName);
+
+
+                }
+
+
                 $post = Post::create([
+                    'image_id' => $image->id,
                     'user_id' =>auth()->id(),
                     'title' => $request->title,
                     'description' => $request->description,
@@ -134,14 +142,54 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post->update([
-            'user_id' =>auth()->id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'category_id' => $request->category,
-            'status' => $request->status,
 
+
+        $request->validate([
+            'file' => ['required', 'image', 'mimes:jpg'],
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'category' => ['required', 'string'],
+            'status' => ['required', 'string'],
+            'tags' => ['required', 'array'],
+            'tags.*' => ['required', 'string']
         ]);
+
+        if($file = $request ->file('file')) {
+
+            $imageName = null;
+
+            if($post->image) {
+
+                $imageName = $post->image->image;
+
+                $imagePath = public_path('storage/auth/posts/');
+
+                if (file_exists( $imagePath . $imageName)) {
+                    unlink($imagePath . $imageName);
+                }
+
+            }
+
+                $fileName = $this->uploadFile($file);
+
+                $post->image->update([
+                    'image' => $fileName
+                ]);
+
+
+            $post->update([
+                'user_id' =>auth()->id(),
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category,
+                'status' => $request->status,
+
+            ]);
+
+            }
+
+
+
         foreach ($request->tags as $tag) {
 
             $post->tags()->attach($tag);
@@ -173,5 +221,34 @@ class PostController extends Controller
         session()->flash('alert-success', 'Post Deleted Successfully');
 
        return to_route('posts.index');
+    }
+
+    private function uploadFile ($file) {
+
+        $fileName = rand(100,  1000000). time() .$file->getClientOriginalName();
+        $filePath = public_path('/storage/auth/posts/');
+        $file->move($filePath, $fileName);
+
+        $image = image::create([
+
+            'image' => $fileName,
+            'type' => image::post_image
+        ]);
+
+
+        return $fileName;
+
+    }
+
+
+    private function storeImage( $fileName) {
+
+        $image = image::create([
+
+            'image' => $fileName,
+            'type' => image::post_image
+        ]);
+
+        return $image;
     }
 }

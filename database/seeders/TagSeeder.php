@@ -14,7 +14,7 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ['php', 'back-end', 'c#', 'node.js'];
+        $tags = ['php', 'back-end', 'c#', 'node.js', 'english', 'ahly'];
 
         foreach ($tags as $tag) {
             Tag::create([

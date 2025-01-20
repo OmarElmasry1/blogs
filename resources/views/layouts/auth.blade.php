@@ -83,9 +83,9 @@
         <div id="sidebar" class="sidebar sidebar-with-footer">
             <!-- Application Brand -->
             <div class="app-brand">
-                <a href="/index.html">
+                <a href="{{route('dashboard')}}">
                     <img src="{{asset('assets/auth/images/logo.png')}}" alt="Mono">
-                    <span class="brand-name">MONO</span>
+                    <span class="brand-name">Dashboard</span>
                 </a>
             </div>
             <!-- begin sidebar scrollbar -->

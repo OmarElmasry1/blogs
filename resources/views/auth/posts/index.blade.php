@@ -51,6 +51,7 @@
 
                             <thead>
                             <tr>
+                                <th scope="col">Images</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">User</th>
@@ -64,6 +65,7 @@
                             @foreach($posts as $post)
 
                                 <tr>
+                                    <td><img src="{{asset('storage/auth/posts/'). '/'.$post->image->image}} " style="width: 80px " alt=""></td>
                                     <td>{{$post->title}}</td>
                                     <td>{{Str::limit($post->description, 15)}}</td>
                                     <td>{{$post->user->name}}</td>

@@ -29,7 +29,7 @@
 
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('posts.update', $post->id) }}">
+                    <form method="post" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 
@@ -69,6 +69,12 @@
                                     <option @selected($post->tags->contains($tag->id)) value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label  class="form-label">Upload Images</label>
+                            <input type="file" name="file" class="form-control" value="{{old('file')}}" placeholder="upload your images"  >
+
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
